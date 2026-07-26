@@ -65,6 +65,8 @@ h1, h2, h3, .serif { font-family: "Fraunces", Georgia, serif; font-weight: 600; 
 .btn-ink:hover { transform: translateY(-2px); }
 .btn-outline { background: transparent; border-color: var(--line); color: var(--ink); }
 .btn-outline:hover { background: var(--paper); border-color: var(--gold); }
+.btn-lg { padding: 16px 34px; font-size: 1.05rem; }
+.hero .btn-lg { margin-top: 6px; }
 
 /* ---------- Header ---------- */
 .site-header {
