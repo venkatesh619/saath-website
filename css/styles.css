@@ -43,7 +43,7 @@ img { max-width: 100%; display: block; }
 .wrap { width: 100%; max-width: var(--maxw); margin: 0 auto; padding: 0 32px; }
 
 h1, h2, h3, .serif { font-family: "Fraunces", Georgia, serif; font-weight: 600; line-height: 1.08; letter-spacing: -0.015em; }
-.em { font-family: "Fraunces", serif; font-style: italic; font-weight: 500; color: var(--gold); }
+.em { font-family: "Fraunces", serif; font-style: normal; font-weight: 700; color: var(--gold); }
 .eyebrow {
   display: inline-flex; align-items: center; gap: 10px;
   font-size: 0.76rem; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold-deep);
@@ -78,7 +78,7 @@ h1, h2, h3, .serif { font-family: "Fraunces", Georgia, serif; font-weight: 600; 
 .nav { display: flex; align-items: center; justify-content: space-between; height: 94px; }
 .brand { display: flex; flex-direction: column; align-items: center; gap: 5px; }
 .brand .logo { height: 52px; width: 52px; display: block; background: #fff; border-radius: 13px; padding: 3px; object-fit: contain; box-shadow: 0 2px 8px -3px rgba(33,26,18,0.25); }
-.brand .brand-tag { font-family: "Fraunces", serif; font-style: italic; font-weight: 500; font-size: 0.72rem; letter-spacing: 0.02em; color: var(--gold-deep); white-space: nowrap; line-height: 1; }
+.brand .brand-tag { font-family: "Fraunces", serif; font-style: normal; font-weight: 600; font-size: 0.7rem; letter-spacing: 0.06em; color: var(--gold-deep); white-space: nowrap; line-height: 1; }
 .brand .name { font-family: "Fraunces", serif; font-weight: 600; font-size: 1.4rem; letter-spacing: -0.01em; }
 .footer-brand .brand { flex-direction: row; align-items: center; gap: 11px; }
 .nav-links { display: flex; align-items: center; gap: 34px; }
