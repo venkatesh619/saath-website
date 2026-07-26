@@ -75,10 +75,12 @@ h1, h2, h3, .serif { font-family: "Fraunces", Georgia, serif; font-weight: 600; 
   backdrop-filter: saturate(160%) blur(14px);
   border-bottom: 1px solid var(--line-soft);
 }
-.nav { display: flex; align-items: center; justify-content: space-between; height: 86px; }
-.brand { display: flex; align-items: center; gap: 11px; }
-.brand .logo { height: 60px; width: 60px; display: block; background: #fff; border-radius: 14px; padding: 3px; object-fit: contain; box-shadow: 0 2px 8px -3px rgba(33,26,18,0.25); }
+.nav { display: flex; align-items: center; justify-content: space-between; height: 94px; }
+.brand { display: flex; flex-direction: column; align-items: center; gap: 5px; }
+.brand .logo { height: 52px; width: 52px; display: block; background: #fff; border-radius: 13px; padding: 3px; object-fit: contain; box-shadow: 0 2px 8px -3px rgba(33,26,18,0.25); }
+.brand .brand-tag { font-family: "Fraunces", serif; font-style: italic; font-weight: 500; font-size: 0.72rem; letter-spacing: 0.02em; color: var(--gold-deep); white-space: nowrap; line-height: 1; }
 .brand .name { font-family: "Fraunces", serif; font-weight: 600; font-size: 1.4rem; letter-spacing: -0.01em; }
+.footer-brand .brand { flex-direction: row; align-items: center; gap: 11px; }
 .nav-links { display: flex; align-items: center; gap: 34px; }
 .nav-links a { font-size: 0.95rem; font-weight: 500; color: var(--ink-soft); transition: color 0.15s; }
 .nav-links a:hover, .nav-links a.active { color: var(--ink); }
@@ -269,7 +271,7 @@ h1, h2, h3, .serif { font-family: "Fraunces", Georgia, serif; font-weight: 600; 
   .grid, .steps, .trust-cards, .frows, .contact-grid { grid-template-columns: 1fr; }
   .nav-links, .site-header .btn { display: none; }
   .nav-toggle { display: block; }
-  .nav-links.open { display: flex; flex-direction: column; gap: 0; position: absolute; top: 86px; left: 0; right: 0; background: var(--cream); border-bottom: 1px solid var(--line); padding: 8px 32px 20px; }
+  .nav-links.open { display: flex; flex-direction: column; gap: 0; position: absolute; top: 94px; left: 0; right: 0; background: var(--cream); border-bottom: 1px solid var(--line); padding: 8px 32px 20px; }
   .nav-links.open a { padding: 14px 0; border-bottom: 1px solid var(--line-soft); width: 100%; }
   .section { padding: 64px 0; }
 }
