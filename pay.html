@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Payment — Saath</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="assets/icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /*
+      Deliberately standalone — no shared stylesheet, no nav, no footer.
+      This page is a doorway the Saath app opens in a browser tab, and the
+      less there is on it, the less there is to fail between tapping Pay and
+      Cashfree taking over.
+
+      It holds NO account information and needs no login. All it receives is
+      a payment session id, which the Saath server has already created for a
+      signed-in account. Nothing here decides who gets Premium — the server
+      does that when Cashfree reports the payment.
+    */
+    :root { --ink:#14110D; --soft:#4A3F35; --faint:#8A7C6E; --gold:#B8893A; --parchment:#F5EFE4; --paper:#FBF7ED; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; background: var(--parchment); color: var(--ink);
+      font-family: Inter, -apple-system, system-ui, sans-serif;
+      display: flex; align-items: center; justify-content: center; padding: 24px;
+    }
+    .card {
+      background: var(--paper); border: 1px solid rgba(20,17,13,0.1); border-radius: 16px;
+      padding: 32px 26px; max-width: 420px; width: 100%; text-align: center;
+    }
+    img.logo { width: 56px; height: 56px; border-radius: 14px; margin-bottom: 18px; }
+    h1 { font-family: Fraunces, Georgia, serif; font-size: 22px; margin: 0 0 8px; font-weight: 600; }
+    p { color: var(--soft); font-size: 15px; line-height: 1.6; margin: 0 0 6px; }
+    .fine { color: var(--faint); font-size: 13px; margin-top: 18px; }
+    .spinner {
+      width: 26px; height: 26px; margin: 22px auto 4px; border-radius: 50%;
+      border: 3px solid rgba(184,137,58,0.25); border-top-color: var(--gold);
+      animation: spin .9s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    @media (prefers-reduced-motion: reduce) { .spinner { animation-duration: 3s; } }
+    .err { display: none; }
+    .err h1 { color: #8B2C2C; }
+    a.btn {
+      display: inline-block; margin-top: 16px; background: var(--ink); color: var(--parchment);
+      text-decoration: none; padding: 12px 22px; border-radius: 10px; font-weight: 600; font-size: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <img class="logo" src="assets/icon.png" alt="" />
+
+    <div id="loading">
+      <h1>Opening secure payment…</h1>
+      <p>Cashfree is taking over from here.</p>
+      <div class="spinner" role="status" aria-label="Loading"></div>
+      <p class="fine">Please don't close this tab.</p>
+    </div>
+
+    <div id="error" class="err">
+      <h1>This payment link has expired</h1>
+      <p id="errmsg">Please go back to Saath and tap your plan again.</p>
+      <a class="btn" href="pricing.html">See the plans</a>
+    </div>
+  </div>
+
+  <script src="https://sdk.cashfree.com/js/v3/cashfree.js"></script>
+  <script>
+    (function () {
+      function fail(msg) {
+        document.getElementById('loading').style.display = 'none';
+        var e = document.getElementById('error');
+        e.style.display = 'block';
+        if (msg) document.getElementById('errmsg').textContent = msg;
+      }
+
+      // The session id travels in the URL FRAGMENT, not the query string.
+      // A fragment is never sent to the web server and stays out of server
+      // logs and referrer headers. It is short-lived and single-purpose, but
+      // there is no reason to write it down anywhere it doesn't need to be.
+      var params = new URLSearchParams((location.hash || '').replace(/^#/, ''));
+      var session = params.get('session');
+      var mode = params.get('mode') === 'production' ? 'production' : 'sandbox';
+
+      if (!session) {
+        fail('That link is missing its payment details. Please go back to Saath and tap your plan again.');
+        return;
+      }
+      if (typeof Cashfree !== 'function') {
+        fail('The payment service could not be reached. Please check your connection and try again.');
+        return;
+      }
+
+      try {
+        Cashfree({ mode: mode }).checkout({
+          paymentSessionId: session,
+          redirectTarget: '_self'
+        }).then(function (r) {
+          // Cashfree resolves with an error object rather than rejecting when
+          // the session is stale, so a resolved promise is not success.
+          if (r && r.error) fail(r.error.message || undefined);
+        }).catch(function (err) {
+          fail(err && err.message ? err.message : undefined);
+        });
+      } catch (err) {
+        fail();
+      }
+    })();
+  </script>
+</body>
+</html>

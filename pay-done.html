@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Payment complete — Saath</title>
+  <meta name="robots" content="noindex" />
+  <link rel="icon" href="assets/icon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /*
+      Where Cashfree sends the browser once the payment is finished.
+
+      Its whole job is to hand control back to the Saath app, which is waiting
+      on the deep link below. It is also the page someone sees if they paid on
+      a laptop, where there is no app to return to — so it has to read as a
+      finished thing on its own, not as a redirect that failed.
+    */
+    :root { --ink:#14110D; --soft:#4A3F35; --faint:#8A7C6E; --gold:#B8893A; --parchment:#F5EFE4; --paper:#FBF7ED; --green:#2E6B4F; }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0; min-height: 100vh; background: var(--parchment); color: var(--ink);
+      font-family: Inter, -apple-system, system-ui, sans-serif;
+      display: flex; align-items: center; justify-content: center; padding: 24px;
+    }
+    .card {
+      background: var(--paper); border: 1px solid rgba(20,17,13,0.1); border-radius: 16px;
+      padding: 34px 26px; max-width: 420px; width: 100%; text-align: center;
+    }
+    .tick {
+      width: 54px; height: 54px; border-radius: 50%; background: rgba(46,107,79,0.12);
+      display: flex; align-items: center; justify-content: center; margin: 0 auto 18px;
+      font-size: 27px; color: var(--green); line-height: 1;
+    }
+    h1 { font-family: Fraunces, Georgia, serif; font-size: 23px; margin: 0 0 10px; font-weight: 600; }
+    p { color: var(--soft); font-size: 15px; line-height: 1.65; margin: 0 0 8px; }
+    .fine { color: var(--faint); font-size: 13px; margin-top: 18px; }
+    a.btn {
+      display: inline-block; margin-top: 18px; background: var(--ink); color: var(--parchment);
+      text-decoration: none; padding: 13px 24px; border-radius: 10px; font-weight: 600; font-size: 15px;
+    }
+    a.plain { color: var(--gold); font-size: 14px; display: inline-block; margin-top: 14px; }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="tick" aria-hidden="true">✓</div>
+    <h1>Payment received</h1>
+    <p>Thank you. Your Saath Premium is being switched on now — it usually takes a few seconds.</p>
+
+    <a class="btn" id="back" href="#">Return to Saath</a>
+    <p class="fine">
+      If nothing happens, open the Saath app yourself. Your Premium will be there.
+      Paid on a computer? Sign in at
+      <a class="plain" href="https://app.saathlegal.com/upgrade">app.saathlegal.com</a>.
+    </p>
+  </div>
+
+  <script>
+    (function () {
+      // Cashfree substitutes the real order id into the return URL, so the
+      // app comes back knowing exactly which payment to confirm rather than
+      // having to guess from the most recent one.
+      var orderId = new URLSearchParams(location.search).get('cf_order') || '';
+      var deepLink = 'saath://upgrade' + (orderId ? '?cf_order=' + encodeURIComponent(orderId) : '');
+
+      document.getElementById('back').setAttribute('href', deepLink);
+
+      // Try it automatically too. On a phone this closes the tab and the app
+      // takes over; on a desktop browser nothing happens and the page above
+      // stands on its own, which is why it is written to be readable.
+      try { location.href = deepLink; } catch (e) {}
+    })();
+  </script>
+</body>
+</html>
