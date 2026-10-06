@@ -1,0 +1,85 @@
+/* Shared styling for the legal pages.
+ *
+ * These are deliberately plain static HTML, not app screens. A payment
+ * gateway's verification bot fetches the URL and reads the response; the rest
+ * of the site is a single-page app that rewrites every path to index.html, so
+ * a bot asking for /legal/terms would receive an empty shell and fail us.
+ * Nothing here needs JavaScript to be readable. */
+
+:root {
+  --ink: #16211c;
+  --ink-soft: #4e5a54;
+  --paper: #ffffff;
+  --rule: #e2e6e2;
+  --accent: #1f5d4c;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  font-size: 17px;
+  line-height: 1.7;
+}
+
+main {
+  max-width: 42rem;
+  margin: 0 auto;
+  padding: 3rem 1.25rem 5rem;
+}
+
+header {
+  border-bottom: 1px solid var(--rule);
+  padding-bottom: 1.25rem;
+  margin-bottom: 2rem;
+}
+
+.brand {
+  font-size: 0.85rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 0 0 0.4rem;
+  font-weight: 600;
+}
+
+h1 { font-size: 1.9rem; line-height: 1.2; margin: 0 0 0.4rem; }
+h2 { font-size: 1.15rem; margin: 2.25rem 0 0.6rem; }
+p, li { color: var(--ink-soft); }
+p { margin: 0 0 1rem; }
+ul { margin: 0 0 1rem; padding-left: 1.3rem; }
+li { margin-bottom: 0.4rem; }
+strong { color: var(--ink); }
+a { color: var(--accent); }
+
+.updated { font-size: 0.9rem; color: #808a85; margin: 0; }
+
+.contact-box {
+  border: 1px solid var(--rule);
+  border-radius: 4px;
+  padding: 1.1rem 1.25rem;
+  margin: 1.5rem 0;
+}
+.contact-box p:last-child { margin-bottom: 0; }
+
+nav.other {
+  border-top: 1px solid var(--rule);
+  margin-top: 3rem;
+  padding-top: 1.25rem;
+  font-size: 0.92rem;
+}
+nav.other a { margin-right: 1.1rem; display: inline-block; }
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --ink: #e8ede9;
+    --ink-soft: #a3ada7;
+    --paper: #111613;
+    --rule: #2c352f;
+    --accent: #7fc9af;
+  }
+  .updated { color: #77817b; }
+}
