@@ -10,6 +10,40 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="css/styles.css" />
+  <style>
+    /* Scoped to this page so nothing here can disturb the shared stylesheet. */
+    /* The header is sticky, so an anchor jump would land with the heading
+       hidden underneath it. */
+    #founder { scroll-margin-top: 96px; }
+    .founder { display: flex; gap: 22px; align-items: flex-start; margin-top: 22px; flex-wrap: wrap; }
+    .founder-badge {
+      width: 86px; height: 86px; flex: none; border-radius: 20px; background: #14110D;
+      color: #E8C27A; font-family: Fraunces, Georgia, serif; font-size: 30px; letter-spacing: 1px;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .founder-body { flex: 1 1 280px; min-width: 0; }
+    .founder-body p { margin: 0 0 10px; color: #4A3F35; line-height: 1.7; }
+    .founder-name { font-family: Fraunces, Georgia, serif; font-size: 24px; color: #14110D; margin-bottom: 2px !important; }
+    .founder-role { font-size: 13.5px; letter-spacing: 0.4px; color: #B8893A; font-weight: 600; margin-bottom: 14px !important; }
+    .founder-note { font-size: 13.5px; color: #8A7C6E; border-left: 3px solid rgba(184,137,58,0.4); padding-left: 14px; }
+    .founder-link { color: #B8893A; font-weight: 600; text-decoration: none; }
+    .founder-link:hover { text-decoration: underline; }
+  </style>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": "Saath",
+    "url": "https://www.saathlegal.com",
+    "founder": {
+      "@type": "Person",
+      "name": "Karukuri Venkatesh",
+      "jobTitle": "Founder",
+      "alumniOf": { "@type": "EducationalOrganization", "name": "Bachelor of Laws (LL.B.)" },
+      "sameAs": ["https://www.linkedin.com/in/venkatesh-karukuri/"]
+    }
+  }
+  </script>
 </head>
 <body>
 
@@ -56,6 +90,33 @@
     </div>
   </section>
 
+  <section class="section" id="founder">
+    <div class="wrap">
+      <span class="eyebrow">Who is behind Saath</span>
+      <h2>The founder</h2>
+      <div class="founder">
+        <div class="founder-badge" aria-hidden="true">KV</div>
+        <div class="founder-body">
+          <p class="founder-name">Karukuri Venkatesh</p>
+          <p class="founder-role">Founder &amp; Product Lead, Saath &middot; LL.B.</p>
+          <p>
+            Saath is built and run by Karukuri Venkatesh, who holds a Bachelor of Laws (LL.B.)
+            and started Saath after watching how much of the legal system is lost on the
+            people it is meant to serve &mdash; not because the law is unknowable, but because
+            nobody explains it to them in their own language.
+          </p>
+          <p class="founder-note">
+            Saath is an independent product and not a law firm. It offers educational guidance,
+            not legal advice, and always says when a qualified advocate is the right next step.
+          </p>
+          <a class="founder-link" href="https://www.linkedin.com/in/venkatesh-karukuri/" target="_blank" rel="noopener">
+            Connect on LinkedIn &rarr;
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
   <section class="section band" id="waitlist">
     <div class="wrap">
       <div class="cta-card" style="box-shadow:none">
@@ -80,7 +141,7 @@
       </div>
       <div class="footer-bottom">
         <p>© <span id="year">2026</span> Saath. Made with care in India.</p>
-        <p class="disc">Educational guidance, not legal advice. Not a government entity.</p>
+        <p class="disc">Founded by <a href="https://www.linkedin.com/in/venkatesh-karukuri/" target="_blank" rel="noopener" style="color:#B8893A;font-weight:600;text-decoration:none">Karukuri Venkatesh, LL.B.</a> &middot; Educational guidance, not legal advice. Not a government entity.</p>
       </div>
     </div>
   </footer>
